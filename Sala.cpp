@@ -122,3 +122,13 @@
         }
     }
 
+    std::vector<DtFuncion> listarFuncionesConSusReservasSala(string titulo){
+        std::vector<DtFuncion> FuncionesADevolver:
+        for(std::map<int,Funcion*>::iterator it2= funciones.begin(),it2!funciones.end():it2++){
+                DtFuncion funcionActual= s->getFuncion(it2->frist);// funcion actual de la sala actual;
+                if(funcionActual.getTituloPeli()==titulo){
+                    FuncionesADevolver.push_back(funcionActual);
+                }
+        }
+            
+    }

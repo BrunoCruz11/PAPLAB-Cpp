@@ -23,6 +23,11 @@ class ConsultaPeliculaController{
       //----------------------------------------------------------------------------------- separo caso de uso
       void confirmarVerPunYCom();
       std::vector<> listarPuntajeYComentarios();
+      //----------------------------------------------------------------------------------- separo caso de uso 
+      //--------------------------------------------------------------------------------- separo caso de uso
+      std vector<DtFuncion> listarFuncionesConSusReservas(string titulo);
+      void finVerReservas();
+      
 }
 
 

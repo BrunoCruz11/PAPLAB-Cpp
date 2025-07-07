@@ -44,9 +44,9 @@ class CineHandler{
         std::vector <DtCine> darCinesDePelicula (string titulo);
         std::vector <DtFuncion> darFuncionesDeCine(int idCine);
         Reserva* colocarReserva(int idFuncion, TipoReserva tipo, std::string dataTarjeta ,float costo, int cantEntradas, Usuario* u);
-
         void agregarCine(std::string direccion , vector<int> capacidadesDeSalasNuevas);
         void quitarPeliculaDeCines(string tituloPelicula); //solo elimina la pelicula de los cines, no del sistema
+        std:: vector<DtFuncion> listarFuncionesConSusReservasCineHandler(string titulo);
     };
 
 #endif

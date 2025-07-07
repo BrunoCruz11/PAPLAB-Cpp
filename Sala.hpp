@@ -30,6 +30,7 @@ class Sala{
     Reserva* agregarReserva(int idFuncion,TipoReserva metodoDePago, std::string dataTarjeta ,float costo,int cantEntradas,Usuario* u);
     std::vector<DtFuncion> listarFunciones();
     void removerPeliDeFunciones(std::string tituloP);
+    std::vector<DtFuncion> listarFuncionesConSusReservasSala(string titulo);
 };
 
 #endif

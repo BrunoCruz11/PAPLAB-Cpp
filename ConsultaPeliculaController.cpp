@@ -36,4 +36,14 @@ void ConsultaPeliculaController::confirmarVerPunYCom(){
 
 }
 
+ std vector<DtFuncion> listarFuncionesConSusReservas(string titulo){
+    return manejadorCine->listarFuncionesConSusReservasCineHandler(string titulo);
+
+ };
+
+ void finVerReservas(){
+    
+
+ };
+
 
