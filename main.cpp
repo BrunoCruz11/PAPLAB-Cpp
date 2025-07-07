@@ -164,6 +164,11 @@ void iniciarSesion(bool& admin, int& op){
         }
     }
 }
+// 2. Cerrar Sesion
+void cerrarSesion(){
+    iSesUsCont->cerrarSesion();
+    iSesUsCont->confirmarCerrarSesion();
+}
 
 // 3. Alta Usuario
 void altaUsuario(){
@@ -563,6 +568,7 @@ int main(){
                 menuAdmin();
                 cin >> op;
             }//Termina while de admin, con op=1
+            cerrarSesion();
         } else 
             if(op==1){//termina if de admin //si soy usuario  
                 menuUsuario();
@@ -588,6 +594,7 @@ int main(){
                     menuUsuario();
                     cin >> op;
                 }//Termina while de usuario, con op=1
+                cerrarSesion();
             }//termina if de usuario
 
 
