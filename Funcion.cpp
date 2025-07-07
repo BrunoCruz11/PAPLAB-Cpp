@@ -6,6 +6,14 @@
 #include "Debito.hpp"
 #include "Credito.hpp"
 
+Funcion::~Funcion(){
+    for(Reserva* r : this->reservas){
+        delete r;
+    }
+    this->reservas.clear();
+    this->sala = NULL;
+    this->pelicula = NULL;
+}
 Funcion::Funcion(int id, DtFecha dia, DtHorario horario){
     this->id = id;
     this->dia = dia;

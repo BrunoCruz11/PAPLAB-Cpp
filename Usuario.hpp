@@ -29,6 +29,7 @@ class Usuario{
         void setFoto(std::string url);
         std::string getNickname();
 
+        void eliminarReservasDePelicula(std::string titulo);
         
 
 };

@@ -36,6 +36,7 @@ class PeliculaHandler{
         std::vector <DtPelicula> listarPuntajeYComentarios();
 
         Pelicula* darPelicula(std::string titulo);
+        void quitaryborrarPelicula();
 
 };
 

@@ -60,3 +60,10 @@ bool UsuarioHandler::chequearCredencialesUsuario(std::string nickname , std::str
 //void UsuarioHandler::asociarReservaAUsuario(Reserva* R , std::string nickname){
 
 //}
+
+void UsuarioHandler::desasociarReservasDePeli(std::string titulo){
+    for(std::map<std::string , Usuario*>::iterator it = usuarios.begin(); it != usuarios.end() ; it++ ){
+        Usuario* U = it->second;
+        U->eliminarReservasDePelicula(titulo);
+    }
+}

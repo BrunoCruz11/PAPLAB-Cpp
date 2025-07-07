@@ -109,6 +109,7 @@
             Funcion* F = it->second;
             if(F->getTituloPeli() == tituloP){
                 F->setPelicula(NULL);
+                delete F;
             }
         }
     }

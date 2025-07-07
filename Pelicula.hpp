@@ -20,7 +20,7 @@ class Pelicula{
         Pelicula(std::string titulo, std::string sinopsis, std::string poster);
         Pelicula(Pelicula& p);
         Pelicula(DtPelicula p);
-        
+        ~Pelicula();
         bool esTitulo( std::string titulo);
         std::string getTitulo();
         float getPuntajePromedio();

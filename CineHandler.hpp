@@ -46,6 +46,7 @@ class CineHandler{
         Reserva* colocarReserva(int idFuncion, TipoReserva tipo, std::string dataTarjeta ,float costo, int cantEntradas, Usuario* u);
 
         void agregarCine(std::string direccion , vector<int> capacidadesDeSalasNuevas);
+        void quitarPeliculaDeCines(string tituloPelicula); //solo elimina la pelicula de los cines, no del sistema
     };
 
 #endif

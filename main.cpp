@@ -468,6 +468,30 @@ void CrearReserva(){
 // 8. Ver Reservas de Pelicula
 
 // 9. Eliminar Pelicula 
+void EliminarPelicula(){
+    bool quiereEliminarPelicula = true;
+    string peliculaElegida;
+    int op;
+    try{
+        cout << "Que pelicula desesa eliminar?"  << endl;
+        imprimirPeliculas(iPeliCont->listarPeliculas());
+        cin >> peliculaElegida;
+        iPeliCont->eligePelicula(peliculaElegida);
+        cout << "Confirmar operacion? 1:Si 0:No" << endl;
+        cin >> op;
+        if(op == 1){
+            iPeliCont->borrarPelicula();
+        }
+        else{
+            iPeliCont->cancelarEliminarPelicula();
+        }
+    }
+    catch(invalid_argument& e){
+        cout << e.what() << endl;
+    }
+}
+
+
 
 // 10. Puntuar Pelicula
 
@@ -526,7 +550,7 @@ int main(){
  
                     break;
                     case 6: //Eliminar Pelicula. Admin
-
+                        EliminarPelicula();
                     break;
                     case 7: //Ver Información de Pelicula. Admin
 

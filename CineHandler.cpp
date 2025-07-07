@@ -192,3 +192,13 @@ void CineHandler::agregarCine(std::string direccion , vector<int> capacidadesDeS
     cines.insert({nuevoCine->getId() ,nuevoCine});
 }
 
+void CineHandler::quitarPeliculaDeCines(string tituloPelicula){
+    for(map<int,Cine*>::iterator it = this->cines.begin() ; it != this->cines.end() ; it++){ //recorre todos los cines
+        Cine* cineActual = it->second;
+        if(cineActual->tienePelicula(tituloPelicula)){ //si el cine tiene la pelicula
+            cineActual->removerPeliculaDeFuncion(tituloPelicula); //quita la pelicula de las funciones que la tengan
+            cineActual->removerPelicula(tituloPelicula); //remueve la pelicula de las peliculas del cine.
+        }
+    }
+    //No se elimina la pelicula del sistema, solo de los cines.
+}

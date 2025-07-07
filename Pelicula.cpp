@@ -3,6 +3,16 @@
 #include <vector>
 #include "Pelicula.hpp"
 #include "DtPelicula.hpp" 
+        Pelicula::~Pelicula(){
+            for (Puntaje* p : puntajes) {
+                    delete p; // Liberar memoria de los puntajes
+                }
+                puntajes.clear();
+                for (Comentario* c : comentarios) {
+                    delete c; // Liberar memoria de los comentarios
+                }
+                comentarios.clear();
+        }
         Pelicula::Pelicula(std::string titulo, std::string sinopsis, std::string poster){
             this->titulo = titulo;
             this->sinopsis = sinopsis;

@@ -1,6 +1,7 @@
 #include "Usuario.hpp"
 #include "Comentario.hpp"
-
+#include "Reserva.hpp"
+#include "Funcion.hpp"
         Usuario::Usuario(std::string nickname , std::string contrasenia , bool esAdmin){
             this->nickname = nickname;
             this->contrasenia = contrasenia;
@@ -28,4 +29,14 @@
         }
         void Usuario::agregarReserva(Reserva* R){
             this->reservas.push_back(R);
+        }
+
+        void Usuario::eliminarReservasDePelicula(std::string titulo){
+            for (std::vector<Reserva*>::iterator it = reservas.begin(); it != reservas.end(); ) {
+                if ((*it)->getFuncion()->getTituloPeli() == titulo) {
+                    it = reservas.erase(it); // Elimina el puntero del vector (NO elimina el objeto)
+                } else {
+                    ++it;
+                }
+            }
         }

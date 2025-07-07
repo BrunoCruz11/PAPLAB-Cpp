@@ -4,6 +4,7 @@
 #include <stdexcept>
         //Momento singleton
         FuncionController::FuncionController(){
+            this->ultimoIdFuncion = 0;
             this->manejadorCine = CineHandler::getInstancia();
             this->manejadorPelicula = PeliculaHandler::getInstancia();
         }

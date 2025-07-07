@@ -26,7 +26,6 @@ PeliculaController* PeliculaController::instancia = NULL;
    if(manejadorpeli->existePelicula(titulo)){
       throw std::invalid_argument("Ya existe una pelicula con ese titulo.:(");
    }
-   std::cout << "pre pushback" << std::endl; 
    peliculasRecordadas.push_back(DtPelicula(titulo,sipnosis,urlPoster));
  }
 
@@ -44,13 +43,28 @@ PeliculaController* PeliculaController::instancia = NULL;
  DtPelicula PeliculaController::eligePelicula(string titulo){
     DtPelicula PeliculaActual = manejadorpeli->getPelicula(titulo);
     peliculasRecordadas.push_back(PeliculaActual);
-
+    PeliculaRecordada = PeliculaActual ;
     return PeliculaActual;
  }
 
  void PeliculaController::borrarPelicula(){
+   if(!manejadorpeli->existePelicula(PeliculaRecordada.getTitulo())){ //verifica si existe la pelicula
+      throw std::invalid_argument("No existe esa pelicula");
+   }
+   else{
+      manejadorpeli->recordarPelicula(PeliculaRecordada.getTitulo()); //recuerda la pelicula que se va a eliminar
+      this->PeliculaRecordada = manejadorpeli->getPelicula(PeliculaRecordada.getTitulo()); //guarda la pelicula recordada en el controller
+      manejadorpeli->quitaryborrarPelicula(); // elimina la película
+     /* it = peliculasRecordadas.erase(it); // erase devuelve el nuevo iterador
+      for (vector<DtPelicula>::iterator it = peliculasRecordadas.begin(); it != peliculasRecordadas.end(); ) {
+         if (it->getTitulo() == PeliculaRecordada.getTitulo()) {
 
-        //manejadorpeli->(Pelicula(darPeliculas())) //?????? JAJAJAJAJJA
+         } else {
+            ++it; // solo avanzás si no eliminaste
+         }
+      }*/
+   }
+
 
 
  }

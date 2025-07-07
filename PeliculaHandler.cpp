@@ -1,5 +1,7 @@
 #include <vector>
 #include "PeliculaHandler.hpp"
+#include "CineHandler.hpp"
+#include "UsuarioHandler.hpp"
 #include <stdexcept>
 using namespace std;
 PeliculaHandler* PeliculaHandler::instancia = nullptr;
@@ -140,4 +142,17 @@ Pelicula* PeliculaHandler::darPelicula(std::string titulo){
         return peliculas.find(titulo)->second;
     }
     throw std::invalid_argument("No existe la pelicula.");
+}
+
+    void PeliculaHandler::quitaryborrarPelicula(){
+    map<string,Pelicula*>::iterator it = peliculas.find(pelicularecordada.getTitulo()); //enecuentro la pelicula en el vector
+    Pelicula* p = it->second;
+    UsuarioHandler* usuarioHandler = UsuarioHandler::getInstancia();
+    usuarioHandler->desasociarReservasDePeli(p->getTitulo());//Quita las reservas de funciones de esa peli del usuario.
+    //llamo al cinehandler para que elimine la pelicula de los cines donde estaba
+    CineHandler* cineHandler = CineHandler::getInstancia();
+    cineHandler->quitarPeliculaDeCines(p->getTitulo()); //esto quita la pelicula de los vectores de los cines, salas y funciones donde estaba de todos los cines.
+
+    peliculas.erase(it); //elimina la pelicula del map
+    delete p; // Elimina la pelicula del sistema
 }
