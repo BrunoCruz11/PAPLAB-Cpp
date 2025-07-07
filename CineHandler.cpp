@@ -186,7 +186,7 @@ void CineHandler::agregarCine(std::string direccion , vector<int> capacidadesDeS
     Cine* nuevoCine = new Cine(nuevoId , direccion);
         std::cout << "preloop" << std::endl;
     for(int c :  capacidadesDeSalasNuevas){
-        nuevoCine->agregarSala(new Sala(darNuevoIdSala(), c));
+        nuevoCine->agregarSala(new Sala(this->darNuevoIdSala(), c));
     }
     std::cout << "preinsert" << std::endl;
     cines.insert({nuevoCine->getId() ,nuevoCine});

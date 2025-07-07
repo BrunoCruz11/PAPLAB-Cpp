@@ -18,17 +18,24 @@ using namespace std;
  
 Fabrica *f;
 ISesionUsuarioController* iSesUsCont;
-/*
-*/
 IReservaController* IReservaCont;
 ICineController *iCineCont;
 IPeliculaController* iPeliCont;
 IFuncionController *iFunCont;
 
+string horaSistema = "17:00";
+Fecha fechaSistema = Fecha(2002,06,20);
+void cambiarFechaGlobal(int dia , int mes, int anio){
+    fechaSistema = Fecha(anio,mes,dia);
+}
+
+void cambiarHoraGlobal(string horaLocal){
+    horaSistema = horaLocal;
+}
 void limpiarPantalla(){
     sleep(1*0.1*0);
-    system("clear");
-    fflush(stdout);
+    //system("clear");
+    //fflush(stdout);
 }
 //Auxliares
 void agregarPeliculaACine(std::string peli , int idCine){
@@ -415,7 +422,6 @@ void CrearReserva(){
                     
 
                     IReservaCont->eligeCine(idCine); 
-                    
                     imprimirFunciones(IReservaCont->listarFuncionDeCine(idCine));
                     cout<<"elija la funcion"<< endl;
                     cin>> idFuncionActual;

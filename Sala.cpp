@@ -44,7 +44,7 @@
         bool disponible = true;
         for(std::map<int , Funcion*>::iterator it = funciones.begin() ; it!=funciones.end() ; it++){
             Funcion* F = it->second;
-            disponible = F->seSuperpone(fecha , horario);
+            disponible = !F->seSuperpone(fecha , horario);
             if(disponible == false){
                 return disponible;
             }
@@ -59,12 +59,17 @@
     }
     
     void Sala::crearFuncion(int id, DtFecha fecha , DtHorario horario, Pelicula* P){
+        Sala* S = this;
         Funcion* nuevaFuncion = new Funcion(id,fecha ,horario , P ,this); //falta seguir este renglon
         this->funciones.insert({nuevaFuncion->getId() , nuevaFuncion});
         if(funciones.find(nuevaFuncion->getId()) != funciones.end()){
             std::cout << "Funcion agregada con exito" << std::endl;
         }
+        else{
+            throw invalid_argument("No quedo creada la sala. [S][crearFunc]");
+        }
     }
+
     
     DtFuncion Sala::getFuncion(int idFuncion){
         std::map<int,Funcion*>::iterator it = this->funciones.find(idFuncion);
@@ -96,11 +101,14 @@
     }
     
     std::vector<DtFuncion> Sala::listarFunciones(){
+        cout << "llego a sala" << endl;
         std::vector<DtFuncion> dataFunciones;
         for(std::map<int , Funcion*>::iterator it = funciones.begin() ; it!=funciones.end() ; it++){
+
             Funcion* F = it->second;
             dataFunciones.push_back(DtFuncion(F));
         }
+        cout << "llego a retorno sala" << endl;
         return dataFunciones;
     }
     
@@ -113,3 +121,4 @@
             }
         }
     }
+

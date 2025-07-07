@@ -2,7 +2,7 @@
 #include "DtFuncion.hpp"
 #include <stdexcept>
 #include <vector>
-        
+#include <iostream>
     Cine::Cine(int id , std::string direccion){
         this->id = id;
         this->direccion = direccion;
@@ -30,6 +30,9 @@
     }
     
     DtSala Cine::getSala(int id){
+        if(this->salas.find(id) == this->salas.end()){
+            throw invalid_argument("No se encontro la sala. [getSala]");
+        }
         DtSala dataSala = DtSala(this->salas.find(id)->second);
         return dataSala;
     }
@@ -82,12 +85,19 @@
         std::vector<DtFuncion> dataFunciones;
         for(std::map<int , Sala*>::iterator it = this->salas.begin() ; it!= this->salas.end() ;it++){
             Sala* S = it->second;
-            const map<int,Funcion*>&funciones = S->getFunciones();
-            for(pair<int, Funcion*> parIdFuncion : funciones){//Se lee: Por cada conjunto de clave y funcion en las funciones de S
+            vector<DtFuncion> funcionesSala = S->listarFunciones();
+            for(DtFuncion F : funcionesSala){
+                dataFunciones.push_back(F);
+            }
+
+            
+            /*for(pair<int, Funcion*> parIdFuncion : funciones){//Se lee: Por cada conjunto de clave y funcion en las funciones de S
                 Funcion* F = parIdFuncion.second; //Hace qe la Funcion del par sea F
                 dataFunciones.push_back(F->getData());// Y la guarda como DT en datafunciones.
-            }
+            }*/
         }
+        cout << "llego a retorno cine" << endl;
+
         return dataFunciones;
     }
     /*
@@ -115,7 +125,11 @@
     }
     
     void Cine::agregarFuncion(Pelicula* P, DtSala S , DtFecha F , DtHorario H , int idFuncion){
+        if(this->salas.find(S.getId()) == this->salas.end()){
+            throw invalid_argument("No se enconto la sala en el cine. [agregarFunc]");
+        }
         Sala* sala = this->salas.find(S.getId())->second;
+
         if(this->tienePelicula(P->getTitulo())){
             Pelicula* pelicula = this->getPelicula(P->getTitulo());
             sala->crearFuncion(idFuncion , F ,H , P);
@@ -170,7 +184,7 @@
     }
     
     bool Cine::tienePelicula(std::string titulo){
-        return this->peliculas.find(titulo) == this->peliculas.end();
+        return this->peliculas.find(titulo) != this->peliculas.end();
     }
 
     bool Cine::tieneFuncionAsientosDisponibles(int asientos, int id){

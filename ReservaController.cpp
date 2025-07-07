@@ -1,4 +1,5 @@
 #include "ReservaController.hpp"
+#include "CineHandler.hpp"
 #include <vector>
 #include <string>
 #include "Descuentos.hpp"

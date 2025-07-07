@@ -1,6 +1,6 @@
 #include "DtFuncion.hpp"
 #include "Funcion.hpp"
-
+#include <iostream>
 DtFuncion::DtFuncion(){}
 
 DtFuncion::DtFuncion(int id, DtHorario horario, vector <DtReserva*> reservas , DtSala sala, DtPelicula pelicula){
@@ -19,11 +19,22 @@ DtFuncion::DtFuncion(const DtFuncion& F){
     this->pelicula = F.getPelicula();
 }
 DtFuncion::DtFuncion(Funcion* F){
+    cout << "Entrando a constructor DtFuncion con Funcion ID: " << F->getId() << endl;
+
     this->id = F->getId();
+    cout << "Asignado ID" << endl;
+
     this->horario = DtHorario(F->getHorario());
+    cout << "Asignado Horario" << endl;
+
     this->reservas = F->listarReservas();
-    this->sala = F->getSala();
+    cout << "Asignado Reservas" << endl;
+
+    //this->sala = F->getSala();
+    cout << "Asignado Sala" << endl;
+
     this->pelicula = F->getPelicula();
+    cout << "Asignado Pelicula" << endl;
 }
         
 // getter

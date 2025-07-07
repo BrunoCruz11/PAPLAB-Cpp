@@ -23,6 +23,7 @@ class Funcion{
         Pelicula* pelicula;        
         
     public:
+        Funcion();
         ~Funcion();
         Funcion(int id, DtFecha dia, DtHorario horario);
         Funcion(int id, DtFecha dia, DtHorario horario, Pelicula* P , Sala* S);

@@ -5,7 +5,7 @@
 #include "Funcion.hpp"
 #include "Debito.hpp"
 #include "Credito.hpp"
-
+Funcion::Funcion(){}
 Funcion::~Funcion(){
     for(Reserva* r : this->reservas){
         delete r;
