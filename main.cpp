@@ -10,7 +10,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <list>
 #include <string>
 #include <iostream>
 #include <unistd.h>

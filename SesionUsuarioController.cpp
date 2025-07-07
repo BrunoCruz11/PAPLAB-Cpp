@@ -1,7 +1,7 @@
 #include "SesionUsuarioController.hpp"
 #include <cstddef>
 #include <stdexcept>
-#include <iostream>
+
 //Constructores y cosas singletonianas
 SesionUsuarioController* SesionUsuarioController::instancia = NULL;
 
