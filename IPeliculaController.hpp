@@ -1,6 +1,5 @@
 #ifndef IPELICULACONTROLLER_HPP
 #define IPELICULACONTROLLER_HPP
-#include "PeliculaHandler.hpp"
 #include "DtPelicula.hpp"
 class IPeliculaController{
     private:

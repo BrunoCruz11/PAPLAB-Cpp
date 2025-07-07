@@ -4,7 +4,6 @@
 #include "DtPelicula.hpp"
 #include "Pelicula.hpp"
 #include <stdexcept>
-#include <iostream>
 
 PeliculaController::PeliculaController(){
    this->manejadorpeli = PeliculaHandler::getInstancia();
@@ -55,7 +54,7 @@ PeliculaController* PeliculaController::instancia = NULL;
       manejadorpeli->recordarPelicula(PeliculaRecordada.getTitulo()); //recuerda la pelicula que se va a eliminar
       this->PeliculaRecordada = manejadorpeli->getPelicula(PeliculaRecordada.getTitulo()); //guarda la pelicula recordada en el controller
       manejadorpeli->quitaryborrarPelicula(); // elimina la película
-     /* it = peliculasRecordadas.erase(it); // erase devuelve el nuevo iterador
+     /* it = peliculasRecordadas.erase(it); // erase devuelve el nuevo iterador 
       for (vector<DtPelicula>::iterator it = peliculasRecordadas.begin(); it != peliculasRecordadas.end(); ) {
          if (it->getTitulo() == PeliculaRecordada.getTitulo()) {
 
