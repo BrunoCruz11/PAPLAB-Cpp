@@ -2,7 +2,7 @@
 #include <vector>
 #include <map>
 #include <string>
-
+#include <iostream>
     Sala::Sala(int id, int capacidad){
         this->id = id;
         this->capacidad = capacidad;
@@ -61,6 +61,9 @@
     void Sala::crearFuncion(int id, DtFecha fecha , DtHorario horario, Pelicula* P){
         Funcion* nuevaFuncion = new Funcion(id,fecha ,horario , P ,this); //falta seguir este renglon
         this->funciones.insert({nuevaFuncion->getId() , nuevaFuncion});
+        if(funciones.find(nuevaFuncion->getId()) != funciones.end()){
+            std::cout << "Funcion agregada con exito" << std::endl;
+        }
     }
     
     DtFuncion Sala::getFuncion(int idFuncion){

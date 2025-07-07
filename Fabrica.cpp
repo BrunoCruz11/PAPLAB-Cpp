@@ -5,7 +5,7 @@
 #include "IPeliculaController.hpp"
 #include "PeliculaController.hpp"
 #include "FuncionController.hpp"
-
+#include "ReservaController.hpp"
 /*
 
    
@@ -19,9 +19,7 @@
       return ComentarioPuntajeController::getInstancia();
    }
 
-   IReservaController* getIReservaController(){
-      return ReservaController::getInstancia();
-   }
+
    */
    ISesionUsuarioController* Fabrica::getISesionUsuarioController(){
       return SesionUsuarioController::getInstancia();
@@ -35,4 +33,7 @@
   }
    IFuncionController* Fabrica::getIFuncionController(){
       return FuncionController::getInstancia();
+   }
+      IReservaController* Fabrica::getIReservaController(){
+      return ReservaController::getInstancia();
    }

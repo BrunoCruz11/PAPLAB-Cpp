@@ -18,7 +18,7 @@ class UsuarioHandler{
 
         void setReservaDeUsuario(Reserva* R);
         void agregarComentarioDeUsuario(Comentario* C);
-        void asociarReservaAUsuario(Reserva* R);
+        void asociarReservaAUsuario(Reserva* R , std::string nickname);
 
         bool chequearCredencialesUsuario(std::string nickname , std::string contrasenia); //Devuelve true si el usuario del nickname dado tiene esa contrasenia.
     };

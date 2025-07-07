@@ -6,7 +6,7 @@
 
 using namespace std;
 
-
+ReservaController* ReservaController::instancia = nullptr;
 ReservaController::ReservaController(){
 ManejadorCine = CineHandler::getInstancia();
 ManejadorPelicula = PeliculaHandler::getInstancia();
@@ -71,7 +71,7 @@ DtPelicula ReservaController::eligePelicula(string titulo){
 }
 void ReservaController::confirmarCompra(Usuario* u , TipoReserva tipo , int costo , int cantAsientos ){
     Reserva* nuevaReserva = ManejadorCine->colocarReserva(funcionRecordada , tipo , BanOFin , costo , cantAsientos, u );
-    ManejadorUsuario->asociarReservaAUsuario(nuevaReserva);
+    ManejadorUsuario->setReservaDeUsuario(nuevaReserva);
 
 }
 

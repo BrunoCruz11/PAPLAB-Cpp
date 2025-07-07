@@ -62,10 +62,10 @@
         }
         
     }
-    std::map<std::string,Pelicula*> Cine::getTodasLasPelis(){
+    std::map<std::string,Pelicula*>& Cine::getTodasLasPelis(){
         return this->peliculas;
     }
-    std::map<int, Sala*> Cine::getTodasLasSalas(){
+    std::map<int, Sala*>& Cine::getTodasLasSalas(){
         return this->salas;
     }
 
@@ -82,7 +82,8 @@
         std::vector<DtFuncion> dataFunciones;
         for(std::map<int , Sala*>::iterator it = this->salas.begin() ; it!= this->salas.end() ;it++){
             Sala* S = it->second;
-            for(pair<int, Funcion*> parIdFuncion : S->getFunciones()){//Se lee: Por cada conjunto de clave y funcion en las funciones de S
+            const map<int,Funcion*>&funciones = S->getFunciones();
+            for(pair<int, Funcion*> parIdFuncion : funciones){//Se lee: Por cada conjunto de clave y funcion en las funciones de S
                 Funcion* F = parIdFuncion.second; //Hace qe la Funcion del par sea F
                 dataFunciones.push_back(F->getData());// Y la guarda como DT en datafunciones.
             }
@@ -154,13 +155,13 @@
     }
     
     bool Cine::tieneFuncion(int id){
-        try{
-            getSalaConFuncion(id);
-            return true;
+        for(map<int,Sala*>::iterator it = salas.begin() ; it != salas.end() ; it++){
+            Sala* S = it->second;
+            if(S->tieneFuncion(id)){
+                return true;
+            }
         }
-        catch(invalid_argument){
-            return false;
-        }
+        return false;
     }
 
     bool Cine::estaDisponibleHorarioEnSala(DtFecha f , DtHorario H){

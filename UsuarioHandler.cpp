@@ -6,7 +6,10 @@ UsuarioHandler* UsuarioHandler::instancia = NULL;
 
 UsuarioHandler::UsuarioHandler(){
     Usuario* usuarioAdmin = new Usuario("admin" , "admin" , true);
+    Usuario* usuarioPato = new Usuario("pato" , "123" , false);
     usuarios.insert({usuarioAdmin->getNickname() , usuarioAdmin});
+    usuarios.insert({usuarioPato->getNickname() , usuarioPato});
+
 }
 UsuarioHandler::~UsuarioHandler(){}
 
@@ -54,4 +57,6 @@ bool UsuarioHandler::chequearCredencialesUsuario(std::string nickname , std::str
         throw std::invalid_argument("No existe el usuario, cancele la operacion.");
     }
 }
-//void UsuarioHandler::asociarReservaAUsuario(Reserva* R);
+//void UsuarioHandler::asociarReservaAUsuario(Reserva* R , std::string nickname){
+
+//}

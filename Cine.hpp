@@ -30,8 +30,8 @@ class Cine{
         Sala* darSala(int id);
         Sala* getSalaConFuncion(int idFuncion);
         Pelicula* getPelicula(std::string titulo);
-        std::map<std::string,Pelicula*> getTodasLasPelis();
-        std::map<int, Sala*> getTodasLasSalas();
+        std::map<std::string,Pelicula*>& getTodasLasPelis();
+        std::map<int, Sala*>& getTodasLasSalas();
 
 
         std::vector<DtSala> listarSalas();

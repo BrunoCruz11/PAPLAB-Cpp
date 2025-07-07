@@ -5,7 +5,7 @@
 #include "IFuncionController.hpp"
 //#include "IConsultasPeliculasController.hpp"
 //#include "IComentarioPuntajeController.hpp"
-//#include "IReservaController.hpp"
+#include "IReservaController.hpp"
 #include "ISesionUsuarioController.hpp"
 
 
@@ -18,7 +18,7 @@ class Fabrica{
         IFuncionController* getIFuncionController();
 //        IConsultasPeliculasController* getIConsultasPeliculasController();
 //        IComentarioPuntajeController* getIComentarioPuntajeController();
-//        IReservaController* getIReservaController();
+        IReservaController* getIReservaController();
         ISesionUsuarioController* getISesionUsuarioController();
 
 

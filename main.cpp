@@ -27,7 +27,7 @@ IPeliculaController* iPeliCont;
 IFuncionController *iFunCont;
 
 void limpiarPantalla(){
-    sleep(1*0.1);
+    sleep(1*0.1*0);
     system("clear");
     fflush(stdout);
 }
@@ -149,6 +149,9 @@ void iniciarSesion(bool& admin, int& op){
             //Chequear si el usuario es admin
             if(iSesUsCont->getUsuarioActual()->esAdmin()){
                 admin = true;
+            }
+            else{
+                admin = false;
             }
                         
         }
@@ -372,7 +375,7 @@ void CrearReserva(){
     string nombreFinanciera;
     int cantAsientos;
     while(quieroAgregarPeliculas){
-        imprimirPeliculas(IReservaCont->listarPeliculas());
+        //imprimirPeliculas(IReservaCont->listarPeliculas());
         cout << "quiere elegir un titulo o salir? 1:seleccionar titulo 0:cancelar(cancelaCompra)" << endl;
         cin >> op;  
         if(op ==0){
@@ -385,8 +388,8 @@ void CrearReserva(){
             cin >>nuevoTitulo;
             peliculaActual = IReservaCont->eligePelicula(nuevoTitulo);
             //peliculaActual= iPeliCont->obtenerPosterSipnosisDeLaPelicula(nuevoTitulo);
-            cout << peliculaActual.getTitulo() << endl;
-            cout << peliculaActual.getSinopsis() << endl;
+            cout << endl << peliculaActual.getTitulo() << endl;
+            cout << endl << "Sinopsis: "<< peliculaActual.getSinopsis() << endl;
             cout<<"elija una opcion: 1:seguir con la reserva y ver informacion adicional 0:cancelar reserva"<< endl;
             cin>> op;
             if(op ==0){
@@ -394,7 +397,8 @@ void CrearReserva(){
             }
             else{
                 imprimirCines(IReservaCont->listarCinesdePelicula(nuevoTitulo));
-                cout<<"elija una opcion: 1:seleccionar un cine, 0:cancelar reserva";
+                cout<<"elija una opcion: 1:seleccionar un cine, 0:cancelar reserva" << endl;
+                cin >> op;
                 if(op ==0){
                     IReservaCont->cancelaCompra();
                 }
@@ -402,9 +406,13 @@ void CrearReserva(){
                     //imprimirCines(IReservaCont->listarCinesdePelicula(nuevoTitulo));
                     cout<<"Ingrese el id del cine:"<< endl;
                     cin>> idCine;
+                    try{
+
+                    
+
                     IReservaCont->eligeCine(idCine); 
                     
-                    imprimirFunciones(IReservaCont->listarFuncionDeCine(idNuevoCine));
+                    imprimirFunciones(IReservaCont->listarFuncionDeCine(idCine));
                     cout<<"elija la funcion"<< endl;
                     cin>> idFuncionActual;
                     IReservaCont->seleccionaFuncion(idFuncionActual);
@@ -430,7 +438,10 @@ void CrearReserva(){
                     }else{
                     cout<<"error, no hay suficientes hacientos para esta funcion."<< endl;
                     }
-            
+                }
+                    catch(invalid_argument& e){
+                        cout << e.what() << endl;
+                    }
                 }
             } 
 
@@ -476,6 +487,7 @@ int main(){
     iCineCont = f->getICineController();
     iPeliCont = f->getIPeliculaController();
     iFunCont = f->getIFuncionController();
+    IReservaCont = f->getIReservaController();
     int op = 1;
     bool admin;
     while( op!=0 ){
@@ -534,7 +546,7 @@ int main(){
                 while(op!=1){
                         switch (op) {
                         case 2: //Crear Reserva. 
-
+                            CrearReserva();
                         break;
                         case 3: //Puntuar Pelicula. 
             

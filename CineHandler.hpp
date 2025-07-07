@@ -36,7 +36,7 @@ class CineHandler{
         std::vector<DtSala> darSalas(DtCine c);
         DtSala getSala(int idSala);
         bool esHorarioDisponible(DtFecha fecha, DtHorario horario,DtCine CineRecordado, DtFecha f);
-        void agregarFuncionEnCine(DtPelicula p, DtCine c, DtSala s, DtHorario horarioNuevo,DtFecha fechaNueva);
+        void agregarFuncionEnCine(int idFunc ,DtPelicula p, DtCine c, DtSala s, DtHorario horarioNuevo,DtFecha fechaNueva);
         //------------------------------------------------------------------------------------------------------- separar caso de uso
         void RecordarCine (Cine* c);
         void recordarFunciones (std::vector <DtFuncion> FuncionesRecordadas);

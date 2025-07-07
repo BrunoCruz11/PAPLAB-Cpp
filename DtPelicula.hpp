@@ -14,14 +14,17 @@ private:
     string poster;
 public:
     //Constructores
+    DtPelicula(DtPelicula&);
+    DtPelicula(string titulo,string sinopsis,string urlPoster);
+    DtPelicula(std::string&, std::string&, float&, std::string&);
     DtPelicula(string titulo, string sinopsis, float puntajePromedio, std::vector<DtComentario> comentariosPelicula,string poster);
     DtPelicula(Pelicula& P);
     DtPelicula(Pelicula* P);
-    DtPelicula(DtPelicula& P); 
+    DtPelicula(const DtPelicula& P); 
     DtPelicula();
 
     //Getters
-    std::vector<DtComentario> getComentarios();
+    std::vector<DtComentario> getComentarios() const;
     string getMotivo()const;
     string getTitulo()const;
     string getSinopsis()const;
