@@ -40,10 +40,10 @@ class CineHandler{
         //------------------------------------------------------------------------------------------------------- separar caso de uso
         void RecordarCine (Cine* c);
         void recordarFunciones (std::vector <DtFuncion> FuncionesRecordadas);
-        bool hayAsientosDisponiblesEnFuncion(int asientos, DtFuncion funcionRecordada);
-        std::vector <DtCine> darCinesDePelicula (DtPelicula Pelicula);
+        bool hayAsientosDisponiblesEnFuncion(int asientos, int id);
+        std::vector <DtCine> darCinesDePelicula (string titulo);
         std::vector <DtFuncion> darFuncionesDeCine(int idCine);
-        Reserva* colocarReserva(int idFuncion, TipoReserva tipo, std::string dataTarjeta ,float costo, int cantEntradas, Usuario* u , float descuento);
+        Reserva* colocarReserva(int idFuncion, TipoReserva tipo, std::string dataTarjeta ,float costo, int cantEntradas, Usuario* u);
 
         void agregarCine(std::string direccion , vector<int> capacidadesDeSalasNuevas);
     };

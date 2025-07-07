@@ -7,7 +7,7 @@ class Credito : public Reserva{
         std::string financiera;
         float porcentajeDescuento;
     public:
-        Credito(std::string financiera, float porcentajeDescuento, float costo, int cantEntradas, Funcion* f, Usuario* u);
+        Credito(std::string financiera, float costo, int cantEntradas, Funcion* f, Usuario* u);
 
         float calcularDescuento(std::string financiera); //segun la financiera, calcular el descuento correspondiente
         DtReserva* getData();

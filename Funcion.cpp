@@ -68,15 +68,15 @@ bool Funcion::hayAsientosDisponibles(int asientos){
         return esDisponible >= asientos;
 }
 
-Reserva* Funcion::CrearReserva(std::string dataTarjeta, float costo, int cantEntradas, Usuario* u){ //Cambie Crear Reserva por 2 funciones diferentes.
+Reserva* Funcion::CrearReservaDebito(std::string dataTarjeta, float costo, int cantEntradas, Usuario* u){ //Cambie Crear Reserva por 2 funciones diferentes.
     Reserva* nuevaReserva;
     nuevaReserva = new Debito(dataTarjeta, costo, cantEntradas, this,u);
     reservas.push_back(dynamic_cast<Reserva*>(nuevaReserva));
     return nuevaReserva;
 }
-Reserva* Funcion::CrearReserva(std::string dataTarjeta , float costo, int cantEntradas, Usuario* u, float descuento){
+Reserva* Funcion::CrearReservaCredito(std::string dataTarjeta , float costo, int cantEntradas, Usuario* u){
     Reserva* nuevaReserva;
-    nuevaReserva = new Credito(dataTarjeta, descuento , costo, cantEntradas, this, u);
+    nuevaReserva = new Credito(dataTarjeta, costo, cantEntradas, this, u);
     reservas.push_back(dynamic_cast<Reserva*>(nuevaReserva));
     return nuevaReserva;
 }

@@ -42,7 +42,7 @@ class Cine{
 
         void agregarSala(Sala* S);
         void agregarFuncion(Pelicula* P, DtSala S , DtFecha F,DtHorario H , int idFuncion);
-        Reserva* agregarReserva(int idFuncion, TipoReserva metodoPago ,std::string dataTarjeta, float costo , int cantEntradas , Usuario* U , float descuento);
+        Reserva* agregarReserva(int idFuncion, TipoReserva metodoPago ,std::string dataTarjeta, float costo , int cantEntradas , Usuario* U);
 
         void removerPelicula(std::string titulo);
         void removerPeliculaDeFuncion(std::string titulo);
@@ -51,7 +51,7 @@ class Cine{
         bool tieneFuncion(int id);
         bool estaDisponibleHorarioEnSala(DtFecha f , DtHorario horario); //inclui DtFecha asi deja de decir que no esta definido
         bool tienePelicula(std::string titulo);
-        bool tieneFuncionAsientosDisponibles(int asientos, DtFuncion F);
+        bool tieneFuncionAsientosDisponibles(int asientos, int id);
 
         void agregarPelicula(Pelicula* P);
     };

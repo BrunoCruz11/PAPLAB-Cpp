@@ -6,6 +6,7 @@
 #include "ICineController.hpp"
 #include "ISesionUsuarioController.hpp"
 #include "IFuncionController.hpp"
+#include "IReservaController.hpp"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -20,6 +21,7 @@ Fabrica *f;
 ISesionUsuarioController* iSesUsCont;
 /*
 */
+IReservaController* IReservaCont;
 ICineController *iCineCont;
 IPeliculaController* iPeliCont;
 IFuncionController *iFunCont;
@@ -63,6 +65,18 @@ void imprimirSalas(vector <DtSala> salasImprimir){
         cout << "ID: " << salaActual.getId() << endl;
         cout << "Capacidad: " << salaActual.getCapacidad() << endl;
         cout << "--------------" << endl;
+    }
+}
+void imprimirFunciones(vector <DtFuncion> impFuncion){
+    for(vector<DtFuncion>::iterator it = impFuncion.begin(); it != impFuncion.end(); it++){
+        DtFuncion funAct = *it; //desreferencio el iterador para obtener el objeto actual
+        cout << "--------------" << endl;
+        cout << "ID: " << funAct.getId() << endl;
+        cout << "Horario: " << funAct.getHorario().getHoraComienzo() << "  " << funAct.getHorario().getHoraFin() << endl;
+        cout << "Sala: " << funAct.getSala().getId() << endl;
+        cout << "Pelicula: " << funAct.getPelicula().getTitulo() << endl;
+        cout << "--------------" << endl;
+
     }
 }
 // Menu
@@ -345,73 +359,99 @@ void altaFuncion(){
 
 }
 // 7. Crear Reserva
-void Crear Reserva(){
+void CrearReserva(){
     int op;
     string nuevoTitulo;
-    DtPelicula peliculaActual
-    string direccionNuevoCine;
+    DtPelicula peliculaActual;
+    int idCine;
     int idNuevoCine;
     int idFuncionActual;
     bool quieroAgregarPeliculas= true;
     int metodo;
     string nombreBanco;
     string nombreFinanciera;
+    int cantAsientos;
     while(quieroAgregarPeliculas){
-    IReservaController->listarPeliculas();
-    cout << "quiere elegir un titulo o salir? 1:seleccionar titulo 0:cancelar(cancelaCompra)" << endl;
-    cin >> op;  
-    if(op ==0){
-        iReservaCont->cancelaCompra();
-        quieroAgregarPeliculas= false;
-    }
-    else if(op ==1){
-        cout <<"que titulo quiere seleccionar?:"<< endl;
-        cin >>nuevoTitulo;
-        peliculaActual= iPeliCont->obtenerPosterSipnosisDeLaPelicula(nuevoTitulo);
-        peliculaActual.getTitulo();
-        peliculaActual.getSinopsis();
-        cout<<"elija una opcion: 1:seguir con la reserva y ver informacion adicional 0:cancelar reserva"<< endl;
-        cin>> op;
+        imprimirPeliculas(IReservaCont->listarPeliculas());
+        cout << "quiere elegir un titulo o salir? 1:seleccionar titulo 0:cancelar(cancelaCompra)" << endl;
+        cin >> op;  
         if(op ==0){
-            iReservaCont->cancelaCompra();
+            quieroAgregarPeliculas= false;
+            IReservaCont->cancelaCompra(); 
         }
-        else{
-            iReservaCont->listarCinesdePelicula(peliculaActual);
-            cout<<"elija una opcion: 1:seleccionar un cine, 0:cancelar reserva"
+        else if(op ==1){
+            imprimirPeliculas(IReservaCont->listarPeliculas());
+            cout <<"que titulo quiere seleccionar?:"<< endl;
+            cin >>nuevoTitulo;
+            peliculaActual = IReservaCont->eligePelicula(nuevoTitulo);
+            //peliculaActual= iPeliCont->obtenerPosterSipnosisDeLaPelicula(nuevoTitulo);
+            cout << peliculaActual.getTitulo() << endl;
+            cout << peliculaActual.getSinopsis() << endl;
+            cout<<"elija una opcion: 1:seguir con la reserva y ver informacion adicional 0:cancelar reserva"<< endl;
+            cin>> op;
             if(op ==0){
-                iReservaCont->cancelaCompra();
+                IReservaCont->cancelaCompra();
             }
-            else if(op== 1){
-                count<<"ingrese la direccion  del Cine"<< endl;
-                cin>> direccionNuevoCine;
-                nuevoCine =iReservaCont->eligeCine(direccionNuevoCine); 
-                idNuevoCine= nuevoCine.getId();
-                IReservaCont->listarFuncionDeCine(idNuevoCine);
-                count<<"elija la funcion"<< endl;
-                cin>> idFuncionActual;
-                IReservaCont->seleccionaFuncion(idFincionActual);
-                count<<"ingrese el metodo de pago 1:Credito 2:Debito"<< endl;
-                cin>> metodo;
-                if(metodo== 1){
-                    count<<"ingrese el nombre de la financiera"<< endl;
-                    cin>> nombreFinanciera;
-                    IReservaCont->ingreseNomFinanciera(nombreFinanciera);
-
+            else{
+                imprimirCines(IReservaCont->listarCinesdePelicula(nuevoTitulo));
+                cout<<"elija una opcion: 1:seleccionar un cine, 0:cancelar reserva";
+                if(op ==0){
+                    IReservaCont->cancelaCompra();
                 }
+                else if(op== 1){
+                    //imprimirCines(IReservaCont->listarCinesdePelicula(nuevoTitulo));
+                    cout<<"Ingrese el id del cine:"<< endl;
+                    cin>> idCine;
+                    IReservaCont->eligeCine(idCine); 
+                    
+                    imprimirFunciones(IReservaCont->listarFuncionDeCine(idNuevoCine));
+                    cout<<"elija la funcion"<< endl;
+                    cin>> idFuncionActual;
+                    IReservaCont->seleccionaFuncion(idFuncionActual);
+                    cout<<"ingrese la cantidad de asientos que desea reservar:"<< endl;
+                    cin>> cantAsientos;
+                    if(IReservaCont->ComprobarLugarDeAsientos(cantAsientos,idFuncionActual)){
+                        cout<<"ingrese el metodo de pago 1:Credito 2:Debito"<< endl;
+                        cin>> metodo;
+                        if(metodo== 1){
+                            cout<<"ingrese el nombre de la financiera"<< endl;
+                            cin>> nombreFinanciera;
+                            IReservaCont->ingreseNomFinanciera(nombreFinanciera);
+                            cout<<"su descuentos es:"<< endl;
+                            cout <<IReservaCont->descuentoDe(nombreFinanciera)<< endl;
+                        }
+                    
 
-                else if(metodo== 2){
-                    count<<"ingrese el nombre del banco"<< endl;
-                    cin>> nombreBanco;
-                    IReservaCont->ingreseNomBanco(nombreBanco);
+                        else if(metodo== 2){
+                            cout<<"ingrese el nombre del banco"<< endl;
+                            cin>> nombreBanco;
+                            IReservaCont->ingreseNomBanco(nombreBanco);
+                        }
+                    }else{
+                    cout<<"error, no hay suficientes hacientos para esta funcion."<< endl;
+                    }
+            
                 }
+            } 
 
+        IReservaCont->precioFinal(IReservaCont->descuentoDe(nombreFinanciera) , cantAsientos);
+        cout <<"elija una opcion 1:confirmar compra 0:cancelar compra"<< endl;
+        cin>> op;
+        if(op== 1){
+            TipoReserva tipo = esDebito;
+            if(metodo == 1){
+                tipo = esCredito;
             }
+            IReservaCont->confirmarCompra(iSesUsCont->getUsuarioActual() , tipo , IReservaCont->precioFinal(IReservaCont->descuentoDe(nombreFinanciera) , cantAsientos), cantAsientos);
 
         }
-
-    }  
- }
+        else if(op== 0){
+            IReservaCont->cancelaCompra();
+        }
+    
+    }
         
+  }
 }
 
 // 8. Ver Reservas de Pelicula

@@ -100,6 +100,7 @@ void CineHandler::agregarFuncionEnCine(DtPelicula p, DtCine c, DtSala s, DtHorar
     int idSala = s.getId(); // obtenes el Id de la sala recordada // La esta pasando por parametro, es confuso.
     if(aux->tieneSala(idSala) ){// chekeas si existe la sala en ese cine
         Sala* s = aux->darSala(idSala);
+        
         map<string,Pelicula*>::iterator it2= aux->getTodasLasPelis().find(p.getTitulo()); // buscas la pelicula en el arry de peliculas para tener la verdadera informacion de ella // no se eee, mepa que hay que pasarle el puntero de una, y haberselo pedido al pelicula controller.
         Pelicula* peliculaNueva= aux->getPelicula(p.getTitulo()); // obtenes la nueva pelicula (se precisa para pasarsela al crear funcion)
         s->crearFuncion(this->darNuevoIdCine(),fechaNueva,horarioNuevo,peliculaNueva); 
@@ -115,22 +116,22 @@ void CineHandler::agregarFuncionEnCine(DtPelicula p, DtCine c, DtSala s, DtHorar
 //    funcionesRecordadas.push_back(FuncionesRecordadas);
 //}
 
-bool CineHandler::hayAsientosDisponiblesEnFuncion(int asientos, DtFuncion funcionRecordada){
+bool CineHandler::hayAsientosDisponiblesEnFuncion(int asientos, int funcionRecordada){
     for(map<int,Cine*>::iterator it= cines.begin(); it!= cines.end(); it++){
             int idDeCineActual= it->first;
             if(cineRecordado.getId()==idDeCineActual){
             Cine* cineActual = it->second;
-            return cineActual->tieneFuncionAsientosDisponibles(asientos,FuncionRecordada);
+            return cineActual->tieneFuncionAsientosDisponibles(asientos,funcionRecordada);
         }
     }
     throw std::invalid_argument("No se encontro el cine. [hayAsientosDispFunc]");
 }
 
-std::vector <DtCine> CineHandler::darCinesDePelicula (DtPelicula Pelicula){
+std::vector <DtCine> CineHandler::darCinesDePelicula (string titulo){
     std::vector<DtCine> cinesADevolver;
     for(map<int,Cine*>::iterator it= cines.begin(); it!= cines.end(); it++){
         Cine* cineActual= it->second;
-        if(cineActual->tienePelicula(Pelicula.getTitulo())){
+        if(cineActual->tienePelicula(titulo)){
             cinesADevolver.push_back(DtCine(cineActual));
         }
     }
@@ -144,7 +145,7 @@ std::vector <DtFuncion> CineHandler::darFuncionesDeCine(int Id){
     return c->listarFunciones();
 }
 
-Reserva* CineHandler::colocarReserva(int idFuncion, TipoReserva tipo, std::string dataTarjeta ,float costo, int cantEntradas, Usuario* u , float descuento){
+Reserva* CineHandler::colocarReserva(int idFuncion, TipoReserva tipo, std::string dataTarjeta ,float costo, int cantEntradas, Usuario* u){//Hacer que le pasen el precio final.
     Cine* c = NULL;
     for(map<int,Cine*>::iterator it = cines.begin() ; it != cines.end() ; it++){
         if(it->second->tieneFuncion(idFuncion)){
@@ -152,7 +153,7 @@ Reserva* CineHandler::colocarReserva(int idFuncion, TipoReserva tipo, std::strin
         }
     }
     if(c != NULL){
-        return c->agregarReserva(idFuncion, tipo , dataTarjeta ,costo, cantEntradas, u, descuento);
+        return c->agregarReserva(idFuncion, tipo , dataTarjeta ,costo, cantEntradas, u);
     }
     else{
         throw std::invalid_argument("No hay ningun cine con esa funcion.(Emoji de calavera)");

@@ -37,8 +37,8 @@ class Funcion{
         void setPelicula(Pelicula* p);
         DtFuncion getData();
         bool hayAsientosDisponibles(int asientos);
-        Reserva* CrearReserva(std::string dataTarjeta,  float costo, int cantEntradas, Usuario* u);//Debito
-        Reserva* CrearReserva(std::string dataTarjeta,  float costo, int cantEntradas, Usuario* u, float descuento);//Credito(Tiene en cuenta descuentos)
+        Reserva* CrearReservaDebito(std::string dataTarjeta,  float costo, int cantEntradas, Usuario* u);//Debito
+        Reserva* CrearReservaCredito(std::string dataTarjeta,  float costo, int cantEntradas, Usuario* u);//Credito(Tiene en cuenta descuentos)
         bool chekPelicula(std::string titulo);
         std::vector<DtReserva*> listarReservas();
         std::string getTituloPeli();

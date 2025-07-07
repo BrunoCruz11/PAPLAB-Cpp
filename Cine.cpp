@@ -125,10 +125,10 @@
         }
     }
     
-    Reserva* Cine::agregarReserva(int idFuncion, TipoReserva metodoPago ,std::string dataTarjeta, float costo , int cantEntradas , Usuario* U , float descuento){
+    Reserva* Cine::agregarReserva(int idFuncion, TipoReserva metodoPago ,std::string dataTarjeta, float costo , int cantEntradas , Usuario* U){
         if(this->tieneFuncion(idFuncion)){
             Sala * sala = this->getSalaConFuncion(idFuncion);
-            return sala->agregarReserva(idFuncion, metodoPago , dataTarjeta , costo,  cantEntradas, U , descuento);
+            return sala->agregarReserva(idFuncion, metodoPago , dataTarjeta , costo,  cantEntradas, U);
         }
         throw invalid_argument("La funcion no existe en el cine.");
     }
@@ -172,9 +172,9 @@
         return this->peliculas.find(titulo) == this->peliculas.end();
     }
 
-    bool Cine::tieneFuncionAsientosDisponibles(int asientos, DtFuncion F){
-        Sala* sala = getSalaConFuncion(F.getId());
-        return sala->comprobarEspacioEnFuncion(asientos, F.getId());
+    bool Cine::tieneFuncionAsientosDisponibles(int asientos, int id){
+        Sala* sala = getSalaConFuncion(id);
+        return sala->comprobarEspacioEnFuncion(asientos, id);
     }
 
     void Cine::agregarPelicula(Pelicula* P){

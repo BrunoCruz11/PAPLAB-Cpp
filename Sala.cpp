@@ -81,14 +81,14 @@
         return false;
     }
     
-    Reserva* Sala::agregarReserva(int idFuncion,TipoReserva metodoDePago, std::string dataTarjeta ,float costo,int cantEntradas,Usuario* u , float descuento){
+    Reserva* Sala::agregarReserva(int idFuncion,TipoReserva metodoDePago, std::string dataTarjeta ,float costo,int cantEntradas,Usuario* u ){
         std::map<int,Funcion*>::iterator it = this->funciones.find(idFuncion); //falta definir funcion recordada UPDATE: La recordada es del controller. DE HECHO, ya se estaba pasando el id, lol! 
         Funcion* funcion = it->second;
         if(metodoDePago == esDebito){
-            return funcion->CrearReserva(dataTarjeta ,costo , cantEntradas ,u);
+            return funcion->CrearReservaDebito(dataTarjeta ,costo , cantEntradas ,u);
         }
         else{
-            return funcion->CrearReserva(dataTarjeta, costo , cantEntradas , u , descuento);
+            return funcion->CrearReservaCredito(dataTarjeta, costo , cantEntradas , u );
         }
     }
     

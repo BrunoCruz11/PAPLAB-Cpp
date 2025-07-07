@@ -27,7 +27,7 @@ class Sala{
     DtFuncion getFuncion(int idFuncion);
     bool comprobarEspacioEnFuncion(int asientos, int funcionRecordada);
     bool tieneFuncion(int idFuncion);
-    Reserva* agregarReserva(int idFuncion,TipoReserva metodoDePago, std::string dataTarjeta ,float costo,int cantEntradas,Usuario* u , float descuento);
+    Reserva* agregarReserva(int idFuncion,TipoReserva metodoDePago, std::string dataTarjeta ,float costo,int cantEntradas,Usuario* u);
     std::vector<DtFuncion> listarFunciones();
     void removerPeliDeFunciones(std::string tituloP);
 };

@@ -3,9 +3,8 @@
 #include <string>
 using namespace std;
 
-Credito::Credito(string financiera, float porcentajeDescuento, float costo, int cantEntradas, Funcion* f, Usuario* u) : Reserva(costo, cantEntradas, f, u){
+Credito::Credito(string financiera, float costo, int cantEntradas, Funcion* f, Usuario* u) : Reserva(costo, cantEntradas, f, u){
     this->financiera = financiera;
-    this->porcentajeDescuento = porcentajeDescuento;
 }
 
 string Credito::getFinanciera(){

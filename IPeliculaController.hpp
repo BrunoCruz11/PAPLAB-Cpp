@@ -13,7 +13,7 @@ class IPeliculaController{
         virtual DtPelicula eligePelicula(std::string titulo)= 0;
         virtual void borrarPelicula()= 0;
         virtual void cancelarEliminarPelicula()= 0;
-        DtPelicula obtenerPosterSipnosisDeLaPelicula(std::string titulo)= 0;
+        //virtual void DtPelicula obtenerPosterSipnosisDeLaPelicula(std::string titulo)= 0;
 
 };
 

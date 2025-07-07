@@ -1,13 +1,15 @@
 #include "ReservaController.hpp"
 #include <vector>
 #include <string>
+#include "Descuentos.hpp"
 #include <stdexcept>
 
 using namespace std;
 
 
 ReservaController::ReservaController(){
-
+ManejadorCine = CineHandler::getInstancia();
+ManejadorPelicula = PeliculaHandler::getInstancia();
 }
 
 ReservaController::~ReservaController(){
@@ -21,20 +23,20 @@ ReservaController* ReservaController::getInstancia(){
     return instancia;
 }
 
-vector <DtCine> ReservaController::listarCinesdePelicula(DtPelicula P){  
+vector <DtCine> ReservaController::listarCinesdePelicula(string p){  
     return ManejadorCine->darCinesDePelicula(p); 
 }
         
 vector <DtFuncion> ReservaController::listarFuncionDeCine(int IdCine){
-   return ManejadorCine->darFuncionesCine(IdCine);
+   return ManejadorCine->darFuncionesDeCine(IdCine);
 } 
 
-DtFuncion ReservaController::seleccionaFuncion(int IdFuncion){ //selecciona una funcion con un IdFuncion dado
-   return ManejadorCine->darDataFuncion(idFuncion);
+void ReservaController::seleccionaFuncion(int IdFuncion){ //selecciona una funcion con un IdFuncion dado
+   funcionRecordada = IdFuncion;
 }
 
-bool ComprobarLugarDeAsientos(int asientos, int idFuncion){
-    return ManejadorCine->hayAsientosDisponiblesEnFuncion(asientos);
+bool ReservaController::ComprobarLugarDeAsientos(int asientos, int idFuncion){
+    return ManejadorCine->hayAsientosDisponiblesEnFuncion(asientos, idFuncion);
 }
 
 void ReservaController::ingreseNomBanco(string banco){
@@ -45,37 +47,36 @@ void ReservaController::ingreseNomFinanciera(string financiera){
     this->BanOFin = financiera;
 } //setea el nomfinanciera en BanOFin
 
-float ReservaController::descuentoDe(DtCredito c){
+float ReservaController::descuentoDe(string nombreFinanciera){
     Descuentos aux;
     return aux.getDescuento(BanOFin);  
 }
 
 float ReservaController::precioFinal(float Descuento, int CantEntradas){
-    return cantEntradas*200*(Descuento/100);
+    return CantEntradas*200*(Descuento/100);
 }
 
-std::vector<DtPelicula> listarPeliculas(){
-    manejadorPelicula->darPeliculas();
-}
-
-
-void eligeCine(int id){
-    DtCine CineAPoner = manejadorCine->getCine(id);
-    cinesRecordados.push_back(CineAPoner);
-}
-
-void ReservaController::confirmarCompra(){
-    Reserva* r = this->ManejadorReserva->getReservaRecordada(); //encuentro la reserva recordada dentro del manejador
-    ReservaController::getInstancia()->ManejadorReserva->agregarReserva(r->getCantEntradas(), r->getCosto(), r->getUsuario(), r->getFuncion()); //llamo a agregar reserva que hace el new (llama constructor) y hace el push_back
+std::vector<DtPelicula> ReservaController::listarPeliculas(){
+    return ManejadorPelicula->darPeliculas();
 }
 
 
-//la funcion de arriba no tiene sentido la hice cansado
+void ReservaController::eligeCine(int id){
+    DtCine CineAPoner = ManejadorCine->getCine(id);
+    cineRecordado = CineAPoner.getId();
+}
+DtPelicula ReservaController::eligePelicula(string titulo){
+    this->peliculaRecordada = titulo;
+    return ManejadorPelicula->getPelicula(titulo);
+}
+void ReservaController::confirmarCompra(Usuario* u , TipoReserva tipo , int costo , int cantAsientos ){
+    Reserva* nuevaReserva = ManejadorCine->colocarReserva(funcionRecordada , tipo , BanOFin , costo , cantAsientos, u );
+    ManejadorUsuario->asociarReservaAUsuario(nuevaReserva);
+
+}
+
+
 
 void ReservaController::cancelaCompra(){
-    Reserva* r = this->ManejadorReserva->getReservaRecordada();
-    if (r != nullptr) {
-        delete r; // libera la memoria
-        this->ManejadorReserva->eliminarReserva(); // borramos tambien del handler
-    }
+    
 }    
