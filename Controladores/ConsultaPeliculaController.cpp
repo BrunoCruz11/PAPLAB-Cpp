@@ -1,7 +1,7 @@
 #include "ConsultaPeliculaController.hpp"
 
 std::vector<DtFuncion> ConsultaPeliculaController::listarFuncionesConSusReservas(){
-    return manejadorCine->listarFuncionesConSusReservas(); //hacer funcion en CineHandler
+    return std::vector<DtFuncion>(); //TODO: falta exponer un metodo en CineController que llegue a CineHandler::listarFuncionesConSusReservasCineHandler
 }
 
 void ConsultaPeliculaController::finVerReservas(){
@@ -12,9 +12,9 @@ DtPelicula ConsultaPeliculaController::eligePelicula(string titulo){
     return this->manejadorPeliculas->eligePelicula(titulo);
 }
 
-std::vector<DtPelicula> ConsultaPeliculaController::listarPelicula(){
-    
-    return manejadorPeliculas.listarPeliculas();
+std::vector<DtPelicula> ConsultaPeliculaController::listarPeliculas(){
+
+    return manejadorPeliculas->listarPeliculas();
 }
 
 void ConsultaPeliculaController::terminarInfoPelicula(){
@@ -23,12 +23,11 @@ void ConsultaPeliculaController::terminarInfoPelicula(){
 
 }
 void ConsultaPeliculaController::mostrarPosterYSipnosis(string titulo){
-    manejadorPeliculas.obtenerPosterYSinopsis(titulo);
+    manejadorPeliculas->obtenerPosterSipnosisDeLaPelicula(titulo);
 }
 
 std::vector<DtFuncion> ConsultaPeliculaController::listarFuncionesPosteriores(int nroCine, string titulo){
-        manejadorPelicula.darFuncionesPosteriores(nroCine,titulo);
-
+        return std::vector<DtFuncion>(); //TODO: falta exponer este caso de uso (manejadorPelicula/darFuncionesPosteriores no existen en esta clase)
 }
 
 void ConsultaPeliculaController::confirmarVerPunYCom(){
@@ -36,14 +35,11 @@ void ConsultaPeliculaController::confirmarVerPunYCom(){
 
 }
 
- std vector<DtFuncion> listarFuncionesConSusReservas(string titulo){
-    return manejadorCine->listarFuncionesConSusReservasCineHandler(string titulo);
+std::vector<DtComentario> ConsultaPeliculaController::listarPuntajeYComentarios(){
+    return std::vector<DtComentario>(); //TODO: falta implementar
+}
 
- };
-
- void finVerReservas(){
-    
-
- };
-
+std::vector<DtFuncion> ConsultaPeliculaController::listarFuncionesConSusReservas(string titulo){
+    return std::vector<DtFuncion>(); //TODO: falta exponer un metodo en CineController que llegue a CineHandler::listarFuncionesConSusReservasCineHandler
+}
 

@@ -18,17 +18,16 @@ class ConsultaPeliculaController{
       DtPelicula eligePelicula(string tiulo);
       std::vector<DtPelicula> listarPeliculas();
       void terminarInfoPelicula();
-      void mostrarPosterYSipnosis();
+      void mostrarPosterYSipnosis(string titulo);
       std::vector<DtFuncion> listarFuncionesPosteriores(int nroCine, string titulo);
       //----------------------------------------------------------------------------------- separo caso de uso
       void confirmarVerPunYCom();
-      std::vector<> listarPuntajeYComentarios();
-      //----------------------------------------------------------------------------------- separo caso de uso 
+      std::vector<DtComentario> listarPuntajeYComentarios();
+      //----------------------------------------------------------------------------------- separo caso de uso
       //--------------------------------------------------------------------------------- separo caso de uso
-      std vector<DtFuncion> listarFuncionesConSusReservas(string titulo);
-      void finVerReservas();
-      
-}
+      std::vector<DtFuncion> listarFuncionesConSusReservas(string titulo);
+
+};
 
 
 #endif

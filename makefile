@@ -1,21 +1,26 @@
 CXX = g++ # Definir CXX como g++
 
-SRCS = main.cpp Cine.cpp Comentario.cpp Credito.cpp Debito.cpp Descuentos.cpp DtCine.cpp DtComentario.cpp DtCredito.cpp DtDebito.cpp DtDireccion.cpp DtFecha.cpp DtFuncion.cpp DtHorario.cpp DtPelicula.cpp DtPuntaje.cpp DtSala.cpp Fabrica.cpp Fecha.cpp Funcion.cpp  Horario.cpp Pelicula.cpp  Puntaje.cpp Reserva.cpp  Sala.cpp SesionUsuarioController.cpp Usuario.cpp UsuarioHandler.cpp DtReserva.cpp CineController.cpp CineHandler.cpp PeliculaController.cpp PeliculaHandler.cpp FuncionController.cpp ReservaController.cpp  # Archivos fuente.(Los que se van a compilar jeje)
-#Provisorio los sacamos:      
-OBJS = $(SRCS:.cpp=.o)	
+# Carpetas del proyecto. Se agregan como -I para que los #include "Archivo.hpp"
+# sigan funcionando igual sin importar en que carpeta este cada archivo.
+INCLUDES = -IDominio -IDTOs -IInterfaces -IControladores -IManejadores
+CXXFLAGS = $(INCLUDES)
 
-TARGET = main	
+SRCS = main.cpp Dominio/Cine.cpp Dominio/Comentario.cpp Dominio/Credito.cpp Dominio/Debito.cpp Dominio/Descuentos.cpp DTOs/DtCine.cpp DTOs/DtComentario.cpp DTOs/DtCredito.cpp DTOs/DtDebito.cpp DTOs/DtDireccion.cpp DTOs/DtFecha.cpp DTOs/DtFuncion.cpp DTOs/DtHorario.cpp DTOs/DtPelicula.cpp DTOs/DtPuntaje.cpp DTOs/DtSala.cpp Fabrica.cpp Dominio/Fecha.cpp Dominio/Funcion.cpp  Dominio/Horario.cpp Dominio/Pelicula.cpp  Dominio/Puntaje.cpp Dominio/Reserva.cpp  Dominio/Sala.cpp Controladores/SesionUsuarioController.cpp Dominio/Usuario.cpp Manejadores/UsuarioHandler.cpp DTOs/DtReserva.cpp Controladores/CineController.cpp Manejadores/CineHandler.cpp Controladores/PeliculaController.cpp Manejadores/PeliculaHandler.cpp Controladores/FuncionController.cpp Controladores/ReservaController.cpp  # Archivos fuente.(Los que se van a compilar jeje)
+#Provisorio los sacamos:
+OBJS = $(SRCS:.cpp=.o)
+
+TARGET = main
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS)	
-	$(CXX) -o $(TARGET) $(OBJS)	
+$(TARGET): $(OBJS)
+	$(CXX) -o $(TARGET) $(OBJS)
 
 %.o: %.cpp %.hpp # crea los archivos .o
-	$(CXX) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 main.o: main.cpp # compila el main solo(no tiene .hpp)
-	$(CXX) -c main.cpp
+	$(CXX) $(CXXFLAGS) -c main.cpp
 
 clean: # Borrar
-	rm -f *.o $(TARGET)
+	rm -f $(OBJS) $(TARGET)

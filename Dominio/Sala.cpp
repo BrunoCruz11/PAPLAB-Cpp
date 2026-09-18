@@ -66,7 +66,7 @@
             std::cout << "Funcion agregada con exito" << std::endl;
         }
         else{
-            throw invalid_argument("No quedo creada la sala. [S][crearFunc]");
+            throw std::invalid_argument("No quedo creada la sala. [S][crearFunc]");
         }
     }
 
@@ -83,7 +83,7 @@
         return funcion->hayAsientosDisponibles(asientos);
     }
     bool Sala::tieneFuncion(int idFuncion){
-        if(funciones.find(id) != funciones.end()){
+        if(funciones.find(idFuncion) != funciones.end()){
             return true;
         }
         return false;
@@ -101,14 +101,14 @@
     }
     
     std::vector<DtFuncion> Sala::listarFunciones(){
-        cout << "llego a sala" << endl;
+        std::cout << "llego a sala" << std::endl;
         std::vector<DtFuncion> dataFunciones;
         for(std::map<int , Funcion*>::iterator it = funciones.begin() ; it!=funciones.end() ; it++){
 
             Funcion* F = it->second;
             dataFunciones.push_back(DtFuncion(F));
         }
-        cout << "llego a retorno sala" << endl;
+        std::cout << "llego a retorno sala" << std::endl;
         return dataFunciones;
     }
     
@@ -122,13 +122,13 @@
         }
     }
 
-    std::vector<DtFuncion> listarFuncionesConSusReservasSala(string titulo){
-        std::vector<DtFuncion> FuncionesADevolver:
-        for(std::map<int,Funcion*>::iterator it2= funciones.begin(),it2!funciones.end():it2++){
-                DtFuncion funcionActual= s->getFuncion(it2->frist);// funcion actual de la sala actual;
-                if(funcionActual.getTituloPeli()==titulo){
-                    FuncionesADevolver.push_back(funcionActual);
+    std::vector<DtFuncion> Sala::listarFuncionesConSusReservasSala(std::string titulo){
+        std::vector<DtFuncion> FuncionesADevolver;
+        for(std::map<int,Funcion*>::iterator it2 = funciones.begin() ; it2 != funciones.end() ; it2++){
+                Funcion* F = it2->second;
+                if(F->getTituloPeli() == titulo){
+                    FuncionesADevolver.push_back(F->getData());
                 }
         }
-            
+        return FuncionesADevolver;
     }

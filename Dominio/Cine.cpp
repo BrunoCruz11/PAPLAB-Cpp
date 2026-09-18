@@ -102,10 +102,13 @@
     }
     
     std::vector<DtFuncion> Cine::listarFuncionesConSusReservasCine(string titulo){ // esto lo implemente hoy 7/7 para poder hacer el penultimo caso de uso
+        std::vector<DtFuncion> dataFunciones;
         for(std::map<int,Sala*>::iterator it= salas.begin(); it!=salas.end();it++){
             Sala* s= it->second;
-            s->listarFuncionesConSusReservasSala(string titulo);
+            std::vector<DtFuncion> funcionesSala = s->listarFuncionesConSusReservasSala(titulo);
+            dataFunciones.insert(dataFunciones.end(), funcionesSala.begin(), funcionesSala.end());
         }
+        return dataFunciones;
     }
 
     std::vector<DtFuncion> Cine::buscarFuncionesPosteriores(std::string titulo , DtFecha fechaActual , DtHorario horaActual){

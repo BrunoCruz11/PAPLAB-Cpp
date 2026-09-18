@@ -203,10 +203,12 @@ void CineHandler::quitarPeliculaDeCines(string tituloPelicula){
     //No se elimina la pelicula del sistema, solo de los cines.
 }
 
-std::vector<DtFuncion> listarFuncionesConSusReservasCineHandler(string titulo){
- for(std::map<int,Cine*>::iterator it= cines.begin(); it!=cine.end();it++){
+std::vector<DtFuncion> CineHandler::listarFuncionesConSusReservasCineHandler(string titulo){
+ std::vector<DtFuncion> dataFunciones;
+ for(std::map<int,Cine*>::iterator it= cines.begin(); it!=cines.end();it++){
     Cine* cineAChekear= it->second;
-    cineAChekear->listarFuncionesConsusReservasCine(string titulo);
+    std::vector<DtFuncion> funcionesCine = cineAChekear->listarFuncionesConSusReservasCine(titulo);
+    dataFunciones.insert(dataFunciones.end(), funcionesCine.begin(), funcionesCine.end());
  }
-
+ return dataFunciones;
 }

@@ -36,7 +36,7 @@ class Cine{
 
         std::vector<DtSala> listarSalas();
         std::vector<DtFuncion> listarFunciones();
-        std::vector<DtFuncion> listarFuncionesConSusReservasCine(); // Realmente se precisa? DtFuncion siempre tiene las reservas. Deberiamos hacer Dts sin reservas en listarFunciones()?
+        std::vector<DtFuncion> listarFuncionesConSusReservasCine(std::string titulo); // Realmente se precisa? DtFuncion siempre tiene las reservas. Deberiamos hacer Dts sin reservas en listarFunciones()?
         std::vector<DtFuncion> buscarFuncionesPosteriores(std::string titulo , DtFecha fechaActual , DtHorario horaActual);
         
 
