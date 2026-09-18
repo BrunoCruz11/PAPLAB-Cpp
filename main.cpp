@@ -22,7 +22,6 @@ IReservaController* IReservaCont;
 ICineController *iCineCont;
 IPeliculaController* iPeliCont;
 IFuncionController *iFunCont;
-IConsultaPeliculasController *IPeliConsultaCont;
 
 
 string horaSistema = "17:00";
@@ -477,39 +476,7 @@ void CrearReserva(){
   }
 }
 //8.ver reserva de pelicula
-
- void VerReservasdePelicula(){
-    vector <DtPelicula> Peliculas = iConsultaPeliCont->listarPeliculas();
-    //ahora encuentro la pelicula que el usuario quiere ver sus reservas
-    string titulodePelicula;
-    std::cout << "Elija una pelicula de la lista:" << endl;
-    for(DtPelicula peli: Peliculas){
-        cout << peli.getTitulo() << endl;
-    }
-    std::cin >> titulodePelicula;
-    try{
-        string nickname = iSesUsCont->getUsuarioActual()->getNickname();
-        vector <DtReserva> ReservasU= iReservaCont->obtenerReservas(nickname); //obtengo las reservas del usuario actual
-        for(DtReserva reserva : ReservasU){
-            if(reserva.getFuncion()->getPelicula().getTitulo() == titulodePelicula){ //si la pelicula de la reserva es igual a la que el usuario eligio
-                cout << "Funcion: " << reserva.getFuncion()->getPelicula().getTitulo() << endl;
-                cout << "Cantidad de Entradas: " << reserva.getCantEntradas() << endl;
-                cout << "Costo Total: " << reserva.getCosto() << endl;
-            }
-        }
-    }
-    catch(std::invalid_argument& e){//Si se equivoca confirmarSesion tira error. Aca se maneja.
-        cout << e.what() << endl; //Imprime mensaje de error.
-    }
-}
-
-void VerReservasdePelicula(){
-    string tituloActual;
-    IPeliConsultaCont->listarPeliculas();
-    cout<<"seleccione una pelicula para ver sus reservas"<< endl;
-    cin<< tituloActual;
-    IPeliConsultaCont->listarFuncionesConSusReservas(tituloActual);   
-}
+//TODO: pendiente de implementar - ver reservas de una pelicula (no conectado al menu, opcion 5)
 
 
 
